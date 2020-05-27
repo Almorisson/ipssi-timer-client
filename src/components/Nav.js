@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, Fragment } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { auth } from 'firebase';
 import { AuthContext } from '../context/authContext';
 
 const Nav = () => {
 	const { state: { user }, dispatch } = useContext(AuthContext);
-    let history = useHistory();
+	let history = useHistory();
 
 	const logoutHandler = () => {
 		// sign out the current user
@@ -16,8 +16,8 @@ const Nav = () => {
 			type: 'LOGGED_IN_USER',
 			payload: null
 		});
-        // redirect to login page
-        history.push('/login');
+		// redirect to login page
+		history.push('/login');
 	};
 
 	return (
@@ -44,11 +44,15 @@ const Nav = () => {
 							Accueil <span className="sr-only">(current)</span>
 						</Link>
 					</li>
-                    <li className="nav-item">
-						<Link className="nav-link" to="/register">
-							Créer un compte
-						</Link>
-					</li>
+					{!user && (
+						<Fragment>
+							<li className="nav-item">
+								<Link className="nav-link" to="/register">
+									Créer un compte
+								</Link>
+							</li>
+						</Fragment>
+					)}
 
 					{user ? (
 						<li className="nav-item">
