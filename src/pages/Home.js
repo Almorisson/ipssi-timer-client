@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost';
+import { AuthContext } from '../context/authContext';
 
 
 const cache = new InMemoryCache();
@@ -13,12 +14,14 @@ const client = new ApolloClient({
 });
 
 const Home = () => {
-
+    const { state } = useContext(AuthContext);
 	return (
 		<div className="container pt-5">
            <div className="jumbotron text-center h1">
                 Welcome to IPSSI Timer Manager
            </div>
+           <hr/>
+            {JSON.stringify(state.user)}
 		</div>
 	);
 };

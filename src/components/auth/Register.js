@@ -29,7 +29,7 @@ const Register = () => {
 	};
 	return (
 		<div className="container p-5">
-			<h4>Créer un compte</h4>
+			{loading ? <h4 className="text-info">Loading...</h4> : <h4>Création de compte - étape 1/2</h4>}
 			<form onSubmit={onSubmitHandler}>
 				<div className="form-group">
 					<label>Adresse Email</label>
