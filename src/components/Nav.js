@@ -1,7 +1,25 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { auth } from 'firebase';
+import { AuthContext } from '../context/authContext';
 
 const Nav = () => {
+	const { state: { user }, dispatch } = useContext(AuthContext);
+    let history = useHistory();
+
+	const logoutHandler = () => {
+		// sign out the current user
+		auth().signOut();
+
+		// clean the user on the state
+		dispatch({
+			type: 'LOGGED_IN_USER',
+			payload: null
+		});
+        // redirect to login page
+        history.push('/login');
+	};
+
 	return (
 		<nav className="navbar navbar-expand-lg navbar-light bg-light">
 			<Link className="navbar-brand" to="/">
@@ -16,7 +34,7 @@ const Nav = () => {
 				aria-expanded="false"
 				aria-label="Toggle navigation"
 			>
-				<span className="navbar-toggler-icon"></span>
+				<span className="navbar-toggler-icon" />
 			</button>
 
 			<div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -26,17 +44,25 @@ const Nav = () => {
 							Accueil <span className="sr-only">(current)</span>
 						</Link>
 					</li>
-					<li className="nav-item">
-						<Link className="nav-link" to="/login">
-							Se connecter
-						</Link>
-					</li>
-
-					<li className="nav-item">
+                    <li className="nav-item">
 						<Link className="nav-link" to="/register">
 							Créer un compte
 						</Link>
 					</li>
+
+					{user ? (
+						<li className="nav-item">
+							<Link className="nav-link" to="/login" type="button" onClick={logoutHandler}>
+								Se Déconnecter
+							</Link>
+						</li>
+					) : (
+						<li className="nav-item">
+							<Link className="nav-link" to="/login">
+								Se connecter
+							</Link>
+						</li>
+					)}
 				</ul>
 				<form className="form-inline my-2 my-lg-0">
 					<input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
