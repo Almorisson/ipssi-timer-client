@@ -3,14 +3,28 @@ import { Link, useHistory } from 'react-router-dom';
 import { auth, googleAuthProvider } from '../../firebase';
 import { AuthContext } from '../../context/authContext';
 import { toast } from 'react-toastify';
+import { gql } from 'apollo-boost';
+import { useMutation } from '@apollo/react-hooks';
+import AuthForm from '../forms/AuthForm';
+
+const CREATE_USER = gql`
+	mutation createUser {
+		createUser {
+			username
+			email
+		}
+	}
+`;
 
 const Login = () => {
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
 	const [ loading, setLoading ] = useState(false);
 
-	const { state, dispatch } = useContext(AuthContext);
+	const { dispatch } = useContext(AuthContext);
 	let history = useHistory();
+
+	const [ createUser ] = useMutation(CREATE_USER);
 
 	const onSubmitHandler = async (e) => {
 		e.preventDefault(); // prevent the default Browser behavior
@@ -18,7 +32,7 @@ const Login = () => {
 
 		try {
 			// sign in user with firebase
-			await auth().signInWithEmailAndPassword(email, password).then(async (result) => {
+			await auth.signInWithEmailAndPassword(email, password).then(async (result) => {
 				const { user } = result;
 				const idTokenResult = await user.getIdTokenResult();
 
@@ -31,7 +45,7 @@ const Login = () => {
 				});
 
 				// send info to our server and mongodb to either create/update
-
+				createUser();
 				// redirect user
 				history.push('/');
 			});
@@ -59,7 +73,7 @@ const Login = () => {
 				});
 
 				// send info to our server and mongodb to either create/update
-
+				createUser();
 				// redirect user
 				history.push('/');
 			});
@@ -73,36 +87,20 @@ const Login = () => {
 	return (
 		<div className="container p-5">
 			<h4>Se connecter à mon compte</h4>
-			<button className="btn btn-raised btn-danger my-3" onClick={googleLoginHandler} >
+			<button className="btn btn-raised btn-danger my-3" onClick={googleLoginHandler}>
 				Se connecter avec Google
 			</button>
-			<form onSubmit={onSubmitHandler}>
-				<div className="form-group">
-					<label>Adresse Email</label>
-					<input
-						value={email}
-						name="email"
-						type="email"
-						placeholder="Entrer votre adresse email"
-						onChange={(e) => setEmail(e.target.value)}
-						className="form-control"
-					/>
-				</div>
-				<div className="form-group">
-					<label>Mot de passe</label>
-					<input
-						value={password}
-						name="password"
-						type="password"
-						placeholder="Entrer votre un mot de passe"
-						onChange={(e) => setPassword(e.target.value)}
-						className="form-control"
-					/>
-				</div>
-				<button className="btn btn-raised btn-primary" disabled={!email || !password || loading}>
-					Se connecter
-				</button>
-			</form>
+			<AuthForm
+				email={email}
+				setEmail={setEmail}
+                password={password}
+				setPassword={setPassword}
+				loading={loading}
+				showPassword
+                onSubmitHandler={onSubmitHandler}
+                btnText="Se connecter"
+                disabledBtn={!email || !password || loading}
+			/>
 		</div>
 	);
 };

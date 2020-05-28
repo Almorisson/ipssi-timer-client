@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {auth} from '../../firebase';
 import { toast } from 'react-toastify';
+import AuthForm from '../forms/AuthForm';
 
 const Register = () => {
 	const [ email, setEmail ] = useState('ndiayemor164@gmail.com');
@@ -30,7 +31,7 @@ const Register = () => {
 	return (
 		<div className="container p-5">
 			{loading ? <h4 className="text-info">Loading...</h4> : <h4>Création de compte - étape 1/2</h4>}
-			<form onSubmit={onSubmitHandler}>
+{/* 			<form onSubmit={onSubmitHandler}>
 				<div className="form-group">
 					<label>Adresse Email</label>
 					<input
@@ -46,7 +47,17 @@ const Register = () => {
 			<button className="btn btn-raised btn-primary" disabled={!email || loading}>
 				Passer à la prochaine étape
 			</button>
-			</form>
+			</form> */}
+
+            <AuthForm
+				email={email}
+				setEmail={setEmail}
+				loading={loading}
+				showPassword={false}
+                onSubmitHandler={onSubmitHandler}
+                btnText="Passer à la prochaine étape"
+                disabledBtn={!email || loading}
+			/>
 		</div>
 	);
 };
