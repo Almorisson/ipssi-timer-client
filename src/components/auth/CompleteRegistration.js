@@ -72,7 +72,7 @@ const CompleteRegistration = () => {
 				createUser();
 
 				// Redirect user to Login page
-				history.push('/');
+				history.push('/profile');
 			}
 		} catch (error) {
 			console.log(`[Registration Complete] Error:  ${error.message}`);
@@ -84,27 +84,6 @@ const CompleteRegistration = () => {
 	return (
 		<div className="container p-5">
 			{loading ? <h4 className="text-info">loading</h4> : <h4>Création de compte - étape 2/2</h4>}
-{/* 			<form onSubmit={onSubmitHandler}>
-				<div className="form-group">
-					<label>Adresse Email</label>
-					<input value={email} name="email" type="email" disabled className="form-control" />
-				</div>
-				<div className="form-group">
-					<label>Mot de passe</label>
-					<input
-						value={password}
-						name="password"
-						type="password"
-						placeholder="Choisissez un mot de passe"
-						disabled={loading}
-						onChange={(e) => setPassword(e.target.value)}
-						className="form-control"
-					/>
-				</div>
-				<button className="btn btn-raised btn-primary" disabled={!email || loading}>
-					Terminer l'inscription
-				</button>
-			</form> */}
             <AuthForm
 				email={email}
 				setEmail={setEmail}

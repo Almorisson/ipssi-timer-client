@@ -47,7 +47,7 @@ const Login = () => {
 				// send info to our server and mongodb to either create/update
 				createUser();
 				// redirect user
-				history.push('/');
+				history.push('/profile');
 			});
 		} catch (error) {
 			console.log(`Error ${error}`);
@@ -75,7 +75,7 @@ const Login = () => {
 				// send info to our server and mongodb to either create/update
 				createUser();
 				// redirect user
-				history.push('/');
+				history.push('/profile');
 			});
 		} catch (error) {
 			console.log(`Error ${error}`);
@@ -96,11 +96,12 @@ const Login = () => {
                 password={password}
 				setPassword={setPassword}
 				loading={loading}
-				showPassword
+				showPasswordInput
                 onSubmitHandler={onSubmitHandler}
                 btnText="Se connecter"
                 disabledBtn={!email || !password || loading}
 			/>
+            <Link className="text-raised text-info float-right" to="/password/forgot">Mot de passe oublié ?</Link>
 		</div>
 	);
 };

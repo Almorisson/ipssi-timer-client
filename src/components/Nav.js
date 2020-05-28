@@ -44,6 +44,14 @@ const Nav = () => {
 							Accueil <span className="sr-only">(current)</span>
 						</Link>
 					</li>
+					{user && (
+						<li className="nav-item">
+							<Link className="nav-link" to="/profile">
+								Profil
+							</Link>
+						</li>
+					)}
+
 					{!user && (
 						<Fragment>
 							<li className="nav-item">

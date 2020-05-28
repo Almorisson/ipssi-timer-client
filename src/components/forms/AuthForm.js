@@ -1,32 +1,36 @@
 import React from 'react';
 
 const AuthForm = ({
-	email,
+	email = '',
 	password = '',
-	setEmail,
-	setPassword,
-	showPassword = false,
+	setEmail = (f) => f,
+	setPassword = (f) => f,
+	showPasswordInput = false,
 	loading = false,
-	onSubmitHandler,
+	onSubmitHandler = (f) => f,
 	btnText,
-    disabledBtn = true,
-    disabledEmailInput = false
+	disabledBtn = true,
+	disabledEmailInput = false,
+	hideEmailInput = false
 }) => {
 	return (
 		<form onSubmit={onSubmitHandler}>
-			<div className="form-group">
-				<label>Adresse Email</label>
-				<input
-					value={email}
-					name="email"
-					type="email"
-					placeholder="Entrer votre adresse email"
-					onChange={(e) => setEmail(e.target.value)}
-					className="form-control"
-                    disabled={disabledEmailInput}
-				/>
-			</div>
-			{showPassword && (
+			{!hideEmailInput && (
+				<div className="form-group">
+					<label>Adresse Email</label>
+					<input
+						value={email}
+						name="email"
+						type="email"
+						placeholder="Entrer votre adresse email"
+						autoComplete={email}
+						onChange={(e) => setEmail(e.target.value)}
+						className="form-control"
+						disabled={disabledEmailInput}
+					/>
+				</div>
+			)}
+			{showPasswordInput && (
 				<div className="form-group">
 					<label>Mot de passe</label>
 					<input

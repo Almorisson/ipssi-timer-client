@@ -1,34 +1,52 @@
 import React, { useContext } from 'react';
 import './App.css';
-import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost';
+
+import ApolloClient from 'apollo-client';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { HttpLink } from 'apollo-link-http';
+
+import { setContext } from 'apollo-link-context';
 import { ApolloProvider } from '@apollo/react-hooks';
+
 import Nav from './components/Nav';
 import Home from './pages/Home';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import CompleteRegistration from './components/auth/CompleteRegistration';
-import { Switch, Route } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 import { AuthContext } from './context/authContext';
+import CustomPrivateRoute from './components/CustomPrivateRoute';
+import PasswordUpdate from './components/auth/PasswordUpdate';
+import Profile from './components/auth/Profile';
 
-const cache = new InMemoryCache();
-const link = new HttpLink({
-	uri: process.env.REACT_APP_GRAPHQL_ENDPOINT
-});
+import { Switch, Route } from 'react-router-dom';
+
+import { ToastContainer } from 'react-toastify';
+import PasswordForgot from './components/auth/PasswordForgot';
+
 
 const App = () => {
 	const { state: { user } } = useContext(AuthContext);
 
+	// create http link
+	const httpLink = new HttpLink({
+		uri: process.env.REACT_APP_GRAPHQL_ENDPOINT
+	});
+
+	// setContext for authtoken
+	const authLink = setContext(() => {
+		return {
+			headers: {
+				authtoken: user ? user.token : ''
+			}
+		};
+	});
+
+	// concat http and authtoken link
+	const link = authLink.concat(httpLink);
+
 	const client = new ApolloClient({
-		cache,
-		link,
-		request: (operation) => {
-			operation.setContext({
-				headers: {
-					authtoken: user ? user.token : ''
-				}
-			});
-		}
+		cache: new InMemoryCache(),
+		link
 	});
 
 	return (
@@ -40,6 +58,9 @@ const App = () => {
 				<Route path="/login" component={Login} />
 				<Route path="/register" component={Register} />
 				<Route path="/complete-registration" component={CompleteRegistration} />
+				<CustomPrivateRoute path="/password/update" component={PasswordUpdate} />
+				<Route path="/password/forgot" component={PasswordForgot} />
+				<CustomPrivateRoute path="/profile" component={Profile} />
 			</Switch>
 		</ApolloProvider>
 	);

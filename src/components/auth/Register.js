@@ -30,24 +30,7 @@ const Register = () => {
 	};
 	return (
 		<div className="container p-5">
-			{loading ? <h4 className="text-info">Loading...</h4> : <h4>Création de compte - étape 1/2</h4>}
-{/* 			<form onSubmit={onSubmitHandler}>
-				<div className="form-group">
-					<label>Adresse Email</label>
-					<input
-						value={email}
-						name="email"
-						type="email"
-						placeholder="Entrer une adresse email valide"
-						className="form-control"
-						disabled={loading}
-						onChange={(e) => setEmail(e.target.value)}
-					/>
-				</div>
-			<button className="btn btn-raised btn-primary" disabled={!email || loading}>
-				Passer à la prochaine étape
-			</button>
-			</form> */}
+			{loading ? <h4 className="text-info">En cours...</h4> : <h4>Création de compte - étape 1/2</h4>}
 
             <AuthForm
 				email={email}
