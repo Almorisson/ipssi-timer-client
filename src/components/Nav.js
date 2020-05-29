@@ -47,7 +47,7 @@ const Nav = () => {
 					{user && (
 						<li className="nav-item">
 							<Link className="nav-link" to="/profile">
-								Profil
+								{ user.updatedAt ? user.username.toLowerCase() : user.email.split("@")[0]}
 							</Link>
 						</li>
 					)}

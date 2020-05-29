@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {auth} from '../../firebase';
 import { toast } from 'react-toastify';
-import AuthForm from '../forms/AuthForm';
+import AuthForm from '../../components/forms/AuthForm';
 
 const Register = () => {
 	const [ email, setEmail ] = useState('ndiayemor164@gmail.com');

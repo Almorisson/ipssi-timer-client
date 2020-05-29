@@ -1,48 +1,23 @@
-import React, { useState, useMemo } from 'react';
-import { gql } from 'apollo-boost';
+import React, { useState, useMemo, useContext } from 'react';
+
+// Apollo imports --
 import { useQuery, useMutation } from '@apollo/react-hooks';
+
+// Others dependencies imports --
 import { toast } from 'react-toastify';
 import omitDeep from 'omit-deep';
 
-// query user infos
-const USER_PROFILE = gql`
-	query {
-		profile {
-			_id
-			name
-			username
-			email
-			images {
-				url
-				public_id
-			}
-			bio
-			createdAt
-			updatedAt
-		}
-	}
-`;
+// context imports --
+import { AuthContext } from '../../context/authContext';
+// graphql imports --
+import {USER_PROFILE} from '../../graphql/queries';
+import {UPDATE_USER_PROFILE} from '../../graphql/mutations';
 
-// Mutation(update user infos)
-const UPDATE_USER_PROFILE = gql`
-	mutation updateUser($input: UpdateUserInput!) {
-		updateUser(input: $input) {
-				_id
-				name
-				username
-				email
-				images {
-					url
-					public_id
-				}
-				bio
-				createdAt
-				updatedAt
-		}
-	}
-`;
+
 
 const Profile = () => {
+    const { dispatch } = useContext(AuthContext);
+
 	const [ profile, setProfile ] = useState({
 		name: '',
 		username: '',
@@ -58,7 +33,7 @@ const Profile = () => {
 	const [ updateUser ] = useMutation(UPDATE_USER_PROFILE, {
 		update: ({ data }) => {
 			console.log('UPDATED USER PROFILE: ', data);
-			toast.success('Vos informations ont été mise àn jour avec succès!');
+			toast.success('Vos informations ont été mise à jour avec succès!');
 		}
 	});
 
@@ -72,6 +47,12 @@ const Profile = () => {
 					bio: data.profile.bio,
 					images: omitDeep(data.profile.images, ['__typename'])
 				});
+
+                // We dispatch new infos to global state
+                dispatch({
+                    type: "LOGGED_IN_USER",
+                    payload: { ...data.profile}
+                })
 			}
 		},
 		[ data ]

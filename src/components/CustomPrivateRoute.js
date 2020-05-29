@@ -17,12 +17,12 @@ const CustomPrivateRoute = ({children,  ...rest }) => {
             <ul className="nav flex-column">
                 <li className="nav-item">
                     <Link className="nav-link" to="/profile">
-                        Profile
+                        Profil
                     </Link>
                 </li>
                 <li className="nav-item">
                     <Link className="nav-link" to="/password/update">
-                        Password
+                        Mot de passe
                     </Link>
                 </li>
             </ul>
