@@ -5,7 +5,7 @@ import { AuthContext } from '../../context/authContext';
 import { toast } from 'react-toastify';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import AuthForm from '../forms/AuthForm';
+import AuthForm from '../../components/forms/AuthForm';
 
 const CREATE_USER = gql`
 	mutation createUser {
@@ -101,7 +101,7 @@ const Login = () => {
                 btnText="Se connecter"
                 disabledBtn={!email || !password || loading}
 			/>
-            <Link className="text-raised text-info float-right" to="/password/forgot">Mot de passe oublié ?</Link>
+            <Link className="text-raised text-info float-right" to="/password/forgot">Mot de passe oubliÃ© ?</Link>
 		</div>
 	);
 };

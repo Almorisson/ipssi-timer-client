@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AuthForm from '../forms/AuthForm';
+import AuthForm from '../../components/forms/AuthForm';
 import { toast } from 'react-toastify';
 import { auth } from '../../firebase';
 
