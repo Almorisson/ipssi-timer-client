@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AuthForm from '../forms/AuthForm';
+import AuthForm from '../../components/forms/AuthForm';
 import { toast } from 'react-toastify';
 import { auth } from '../../firebase';
 
@@ -25,7 +25,7 @@ const PasswordUpdate = () => {
 
 	return (
 		<div className="container p-5">
-			{loading ? <h4 className="text-info">En cours ...</h4> : <h4>Modification de mot de passe</h4>}
+			{loading ? <h4 className="text-info">En cours ...</h4> : <h4 className="py-5">Modification de mot de passe</h4>}
 			<AuthForm
 				password={password}
 				setPassword={setPassword}
