@@ -40,7 +40,7 @@ const CustomPrivateRoute = ({children,  ...rest }) => {
         </div>
     );
 
-    return user ? renderMainContent() : <h4 className="text-info">Content En cours...</h4>;
+    return user ? renderMainContent() : <h4 className="container py-5 text-center text-info">Contenu en cours de chargement ...</h4>;
 };
 
 export default CustomPrivateRoute;
