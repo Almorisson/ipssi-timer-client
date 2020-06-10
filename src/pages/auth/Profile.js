@@ -10,11 +10,13 @@ import omitDeep from 'omit-deep';
 // context imports --
 import { AuthContext } from '../../context/authContext';
 // graphql imports --
-import { USER_PROFILE } from '../../graphql/queries';
-import { UPDATE_USER_PROFILE } from '../../graphql/mutations';
+import {USER_PROFILE} from '../../graphql/queries';
+import {UPDATE_USER_PROFILE} from '../../graphql/mutations';
+
+
 
 const Profile = () => {
-	const { state, dispatch } = useContext(AuthContext);
+    const { dispatch } = useContext(AuthContext);
 
 	const [ profile, setProfile ] = useState({
 		name: '',
@@ -43,21 +45,21 @@ const Profile = () => {
 					name: data.profile.name,
 					email: data.profile.email,
 					bio: data.profile.bio,
-					images: omitDeep(data.profile.images, [ '__typename' ])
+					images: omitDeep(data.profile.images, ['__typename'])
 				});
 
-				//TODO: Fix warning messages when code are executed - We dispatch new infos to global state
-				/* dispatch({
-					type: 'LOGGED_IN_USER',
-					payload: { ...data['profile'] }
-				});*/
+                // We dispatch new infos to global state
+                dispatch({
+                    type: "LOGGED_IN_USER",
+                    payload: { ...data.profile}
+                })
 			}
 		},
 		[ data ]
 	);
 
 	const profileUpdateForm = () => {
-		// Will come later to image upload - Not a must for the project
+        // Will come later to image upload - Not a must for the project
 		const { username, name, email, bio, images } = profile;
 
 		const onSubmitHandler = async (e) => {
@@ -65,7 +67,7 @@ const Profile = () => {
 			setLoading(true);
 			//console.log(profile);
 			try {
-				// execute the mutation responsible to update user profile infos
+                // execute the mutation responsible to update user profile infos
 				await updateUser({ variables: { input: profile } });
 			} catch (error) {
 				console.log(error);
