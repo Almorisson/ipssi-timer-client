@@ -13,7 +13,6 @@ import omitDeep from 'omit-deep';
 import ImageUpload from '../../components/ImageUpload';
 
 // graphql imports --
-
 import { USER_PROFILE } from '../../graphql/queries';
 import { UPDATE_USER_PROFILE } from '../../graphql/mutations';
 import UpdateProfileForm from '../../components/forms/UpdateProfileForm';
@@ -46,14 +45,14 @@ const Profile = () => {
 					name: data.profile.name,
 					email: data.profile.email,
 					bio: data.profile.bio,
-					images: omitDeep(data.profile.images, ['__typename'])
+					images: omitDeep(data.profile.images, [ '__typename' ])
 				});
 
-                // We dispatch new infos to global state
-                dispatch({
-                    type: "LOGGED_IN_USER",
-                    payload: { ...data.profile}
-                })
+				//TODO: Fix warning messages when code are executed - We dispatch new infos to global state
+				/* dispatch({
+					type: 'LOGGED_IN_USER',
+					payload: { ...data['profile'] }
+				});*/
 			}
 		},
 		[ data ]
