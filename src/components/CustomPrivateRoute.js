@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Route, Link } from 'react-router-dom';
 import { AuthContext } from '../context/authContext';
+import RedirectLoader from './RedirectLoader';
 
 const CustomPrivateRoute = ({children,  ...rest }) => {
     const { state } = useContext(AuthContext);
@@ -40,7 +41,7 @@ const CustomPrivateRoute = ({children,  ...rest }) => {
         </div>
     );
 
-    return user ? renderMainContent() : <h4 className="container py-5 text-center text-info">Contenu en cours de chargement ...</h4>;
+    return user ? renderMainContent() : <RedirectLoader path="/" />;
 };
 
 export default CustomPrivateRoute;
