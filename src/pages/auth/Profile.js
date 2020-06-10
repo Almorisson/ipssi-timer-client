@@ -8,16 +8,17 @@ import { toast } from 'react-toastify';
 import omitDeep from 'omit-deep';
 
 // context imports --
-import { AuthContext } from '../../context/authContext';
+
+// components imports --
+import ImageUpload from '../../components/ImageUpload';
+
 // graphql imports --
-import {USER_PROFILE} from '../../graphql/queries';
-import {UPDATE_USER_PROFILE} from '../../graphql/mutations';
 
-
+import { USER_PROFILE } from '../../graphql/queries';
+import { UPDATE_USER_PROFILE } from '../../graphql/mutations';
+import UpdateProfileForm from '../../components/forms/UpdateProfileForm';
 
 const Profile = () => {
-    const { dispatch } = useContext(AuthContext);
-
 	const [ profile, setProfile ] = useState({
 		name: '',
 		username: '',
@@ -58,90 +59,47 @@ const Profile = () => {
 		[ data ]
 	);
 
-	const profileUpdateForm = () => {
-        // Will come later to image upload - Not a must for the project
-		const { username, name, email, bio, images } = profile;
-
-		const onSubmitHandler = async (e) => {
-			e.preventDefault();
+	const onSubmitHandler = async (e) => {
+		e.preventDefault();
+		setLoading(true);
+		//console.log(profile);
+		try {
+			// execute the mutation responsible to update user profile infos
 			setLoading(true);
-			//console.log(profile);
-			try {
-                // execute the mutation responsible to update user profile infos
-				await updateUser({ variables: { input: profile } });
-			} catch (error) {
-				console.log(error);
-			}
+			await updateUser({ variables: { input: profile } });
+            setLoading(false);
+		} catch (error) {
 			setLoading(false);
-		};
-
-		const onChangeHandler = (e) => {
-			// we update the profile state by keeping the unmodified values and update changed properties
-			setProfile({ ...profile, [e.target.name]: e.target.value });
-		};
-
-		const handleImagesUpload = () => {};
-
-		return (
-			<form onSubmit={onSubmitHandler}>
-				<div className="form-group">
-					<label>Nom d'utilisateur</label>
-					<input
-						type="text"
-						className="form-control"
-						name="username"
-						value={username}
-						placeholder="Votre nouveau Nom d'utilisateur"
-						onChange={onChangeHandler}
-					/>
-				</div>
-				<div className="form-group">
-					<label>Nom</label>
-					<input
-						type="text"
-						className="form-control"
-						name="name"
-						value={name || ''}
-						placeholder="Votre nouveau Nom"
-						onChange={onChangeHandler}
-					/>
-				</div>
-				<div className="form-group">
-					<label>Adresse Email</label>
-					<input type="email" className="form-control" name="email" value={email} disabled />
-				</div>
-				<div className="form-group">
-					<label>Bio</label>
-					<textarea
-						type="text"
-						className="form-control"
-						name="bio"
-						value={bio || ''}
-						placeholder="votre biographie"
-						onChange={onChangeHandler}
-					/>
-				</div>
-				<div className="form-group">
-					<label>Images de Profil</label>
-					<input
-						type="file"
-						accept="image/*"
-						className="form-control"
-						name="profileImages"
-						onChange={handleImagesUpload}
-					/>
-				</div>
-
-				<button className="btn btn-raised btn-primary" disabled={loading}>
-					Mettre à jour mon profil
-				</button>
-			</form>
-		);
+			console.log(error);
+		}
+		setLoading(false);
 	};
+
+	const onChangeHandler = (e) => {
+        e.preventDefault()
+		// we update the profile state by keeping the unmodified values and update changed properties
+		setProfile({ ...profile, [e.target.name]: e.target.value });
+	};
+
 	return (
 		<div className="container p-5">
-			{loading ? <h4 className="text-info">En cours...</h4> : <h4 className="py-5">Mon Profil utilisateur</h4>}
-			{profileUpdateForm()}
+			<div className="row">
+				<div className="col-md-12 pb-3">
+					{loading ? (
+						<h4 className="text-info">En cours...</h4>
+					) : (
+						<h4 className="py-5">Mon Profil utilisateur</h4>
+					)}
+				</div>
+				<ImageUpload profile={profile} setProfile={setProfile} setLoading={setLoading} loading={loading} />
+			</div>
+
+			<UpdateProfileForm
+				{...profile}
+				onSubmitHandler={onSubmitHandler}
+				onChangeHandler={onChangeHandler}
+				loading={loading}
+			/>
 		</div>
 	);
 };
