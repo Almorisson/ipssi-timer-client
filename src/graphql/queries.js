@@ -10,3 +10,13 @@ export const USER_PROFILE = gql`
 	}
     ${USER_INFOS}
 `;
+
+// query user infos
+export const ALL_USERS = gql`
+	query {
+		allUsers {
+			...userInfos
+		}
+	}
+    ${USER_INFOS}
+`;

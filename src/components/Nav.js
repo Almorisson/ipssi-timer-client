@@ -44,6 +44,11 @@ const Nav = () => {
 							Accueil <span className="sr-only">(current)</span>
 						</Link>
 					</li>
+                    <li className="nav-item active">
+						<Link className="nav-link" to="/users">
+							Voir les utilisateurs
+						</Link>
+					</li>
 					{user && (
 						<li className="nav-item">
 							<Link className="nav-link" to="/profile">

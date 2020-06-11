@@ -28,6 +28,7 @@ import { ToastContainer } from 'react-toastify';
 // react-toastify imports --
 import './App.css';
 import CustomPublicRoute from './components/CustomPublicRoute';
+import UsersPublicProfile from './pages/UsersPublicProfile';
 
 const App = () => {
 	const { state: { user } } = useContext(AuthContext);
@@ -60,6 +61,7 @@ const App = () => {
 			<ToastContainer />
 			<Switch>
 				<Route exact path="/" component={Home} />
+				<Route exact path="/users" component={UsersPublicProfile} />
 				<CustomPublicRoute path="/login" component={Login} />
 				<CustomPublicRoute path="/register" component={Register} />
 				<Route path="/complete-registration" component={CompleteRegistration} />
