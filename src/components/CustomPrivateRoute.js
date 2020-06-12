@@ -11,6 +11,7 @@ const CustomPrivateRoute = ({children,  ...rest }) => {
         if (state.user) {
             setUser(true);
         }
+        return () => {}
     }, [state.user]);
 
     const sideNav = () => (

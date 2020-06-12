@@ -35,7 +35,6 @@ const PasswordUpdate = () => {
 				onSubmitHandler={onSubmitHandler}
 				showPasswordInput
 				hideEmailInput
-				disabledBtn={!password || loading}
 			/>
 		</div>
 	);

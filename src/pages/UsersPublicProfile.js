@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { ALL_USERS } from '../graphql/queries';
 import UserCard from '../components/UserCard';

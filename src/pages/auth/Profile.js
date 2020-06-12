@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useContext } from 'react';
+import React, { useState, useMemo } from 'react';
 
 // Apollo imports --
 import { useQuery, useMutation } from '@apollo/react-hooks';

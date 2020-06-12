@@ -1,5 +1,5 @@
 import { gql } from 'apollo-boost';
-import { USER_INFOS} from './fragments';
+import { USER_INFOS } from './fragments';
 
 // query user infos
 export const USER_PROFILE = gql`
@@ -11,7 +11,7 @@ export const USER_PROFILE = gql`
     ${USER_INFOS}
 `;
 
-// query user infos
+// query all users infos
 export const ALL_USERS = gql`
 	query {
 		allUsers {

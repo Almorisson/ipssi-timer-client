@@ -13,7 +13,7 @@ const CustomPublicRoute = ({ ...rest }) => {
 				history.push('/profile');
 			}
 		},
-		[ state.user ]
+		[ state.user, history ]
 	);
 
 	return <Route {...rest} />;

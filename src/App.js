@@ -29,6 +29,7 @@ import { ToastContainer } from 'react-toastify';
 import './App.css';
 import CustomPublicRoute from './components/CustomPublicRoute';
 import UsersPublicProfile from './pages/UsersPublicProfile';
+import SingleUser from './pages/SingleUser';
 
 const App = () => {
 	const { state: { user } } = useContext(AuthContext);
@@ -68,6 +69,7 @@ const App = () => {
 				<CustomPrivateRoute path="/password/update" component={PasswordUpdate} />
 				<Route path="/password/forgot" component={PasswordForgot} />
 				<CustomPrivateRoute path="/profile" component={Profile} />
+                <Route exact path="/user" component={SingleUser} />
 			</Switch>
 		</ApolloProvider>
 	);

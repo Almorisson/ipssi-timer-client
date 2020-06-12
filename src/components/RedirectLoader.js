@@ -15,7 +15,7 @@ const RedirectLoader = ({ path }) => {
 
         // clean the hook
         return () => clearInterval(interval);
-    }, [counter])
+    }, [counter, history, path])
 
     return (
         <div className="container-fluid p-5 text-center">
