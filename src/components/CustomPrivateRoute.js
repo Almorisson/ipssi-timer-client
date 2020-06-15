@@ -22,6 +22,17 @@ const CustomPrivateRoute = ({children,  ...rest }) => {
                     </Link>
                 </li>
                 <li className="nav-item">
+                    <Link className="nav-link" to="/teams">
+                        Equipes
+                    </Link>
+                </li>
+                <li className="nav-item">
+                    <Link className="nav-link" to="/projects">
+                        Projets
+                    </Link>
+                </li>
+                <hr />
+                <li className="nav-item">
                     <Link className="nav-link" to="/password/update">
                         Mot de passe
                     </Link>
