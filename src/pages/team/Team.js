@@ -3,6 +3,8 @@ import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/authContext';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { CREATE_TEAM} from '../../graphql/mutations';
+import { ALL_TEAMS } from '../../graphql/queries';
+
 const initialState = {
 	name: '',
 	description: '',
@@ -27,10 +29,13 @@ const Team = () => {
                 data: {
                     postsByUser: [postCreate, ...postsByUser]
                 }
-            }); 
+            });
         }, */
         //onError: (err) => console.log(err.graphqQLError[0].message)
     });
+
+    // queries
+    const {data: teams} = useQuery(ALL_TEAMS);
 
 	const onSubmitHandler = async (e) => {
         e.preventDefault();
@@ -90,7 +95,7 @@ const Team = () => {
 			</div>
 			{createTeamForm()}
 			<hr />
-			{JSON.stringify(name || description)}
+			{JSON.stringify(teams)}
 		</div>
 	);
 };
