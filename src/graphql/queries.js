@@ -30,3 +30,13 @@ export const ALL_TEAMS = gql`
 	}
     ${TEAM_INFOS}
 `;
+
+// query a single team infos
+export const SINGLE_TEAM = gql`
+    query singleTeam($teamId: String!) {
+        singleTeam(teamId: $teamId) {
+            ...teamsInfosForAUser
+        }
+    }
+    ${TEAM_INFOS}
+`;

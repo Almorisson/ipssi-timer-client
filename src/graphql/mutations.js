@@ -11,6 +11,7 @@ export const UPDATE_USER_PROFILE = gql`
     ${USER_INFOS}
 `;
 
+// Mutation(create user infos)
 export const CREATE_TEAM = gql`
     mutation createTeam($input: CreateTeamInput!) {
         createTeam(input: $input) {
@@ -18,4 +19,23 @@ export const CREATE_TEAM = gql`
         }
     }
     ${TEAM_INFOS}
+`;
+
+// Mutation(update team infos)
+export const UPDATE_TEAM = gql`
+    mutation updateTeam($input: UpdateTeamInput!) {
+        updateTeam(input: $input) {
+            ...teamsInfosForAUser
+        }
+    }
+    ${TEAM_INFOS}
+`;
+
+// Mutation(delete user infos)
+export const DELETE_TEAM = gql`
+    mutation deleteTeam($teamId: String!) {
+        deleteTeam(teamId: $teamId) {
+            _id
+        }
+    }
 `;
