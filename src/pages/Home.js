@@ -1,17 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost';
+import React, { useContext } from 'react';
 import { AuthContext } from '../context/authContext';
-
-
-const cache = new InMemoryCache();
-const link = new HttpLink({
-    uri: process.env.REACT_APP_GRAPHQL_ENDPOINT
-})
-
-const client = new ApolloClient({
-	cache,
-    link
-});
 
 const Home = () => {
     const { state } = useContext(AuthContext);
