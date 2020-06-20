@@ -2,7 +2,7 @@ import React, { useContext, Fragment } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { auth } from 'firebase';
 import { AuthContext } from '../context/authContext';
-
+import logo from '../assets/logo.svg';
 const Nav = () => {
 	const { state: { user }, dispatch } = useContext(AuthContext);
 	let history = useHistory();
@@ -22,8 +22,8 @@ const Nav = () => {
 
 	return (
 		<nav className="navbar navbar-expand-lg navbar-light bg-light">
-			<Link className="navbar-brand" to="/">
-				IPSSI Timer Manager
+			<Link className="navbar-brand" to="/" type="button" style={{ padding: 0 }}>
+				<img src={logo} alt="IPSSI Project Time Manager logo" style={{ height: "4rem" }}/>
 			</Link>
 			<button
 				className="navbar-toggler"
@@ -39,11 +39,6 @@ const Nav = () => {
 
 			<div className="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul className="navbar-nav mr-auto">
-					<li className="nav-item active">
-						<Link className="nav-link" to="/">
-							Accueil <span className="sr-only">(current)</span>
-						</Link>
-					</li>
 					{user && (
 						<li className="nav-item">
 							<Link className="nav-link" to="/profile">
