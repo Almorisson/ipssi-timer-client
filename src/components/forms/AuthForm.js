@@ -5,7 +5,7 @@ const AuthForm = ({
 	password = '',
 	setEmail = (f) => f,
 	setPassword = (f) => f,
-	showPasswordInput = false,
+	showPasswordInput = true,
 	loading = false,
 	onSubmitHandler = (f) => f,
 	btnText,

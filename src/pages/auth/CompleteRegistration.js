@@ -88,7 +88,7 @@ const CompleteRegistration = () => {
 				email={email}
 				setEmail={setEmail}
 				loading={loading}
-				showPassword
+				showPassword={false}
                 password={password}
                 setPassword={setPassword}
                 onSubmitHandler={onSubmitHandler}
