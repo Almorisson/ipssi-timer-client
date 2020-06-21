@@ -1,21 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/authContext';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { CREATE_TEAM, DELETE_TEAM } from '../../graphql/mutations';
-import { ALL_TEAMS } from '../../graphql/queries';
+import { ALL_TEAMS, ALL_USERS } from '../../graphql/queries';
 import TeamCard from '../../components/TeamCard';
+import TeamForm from '../../components/forms/TeamForm';
+import omitDeep from 'omit-deep';
 
 const initialState = {
 	name: '',
-	description: ''
+	description: '',
+	users: []
 };
 const Team = () => {
 	const [ values, setValues ] = useState(initialState);
 	const [ loading, setLoading ] = useState(false);
+	const [ selected, setSelected ] = useState([]);
 
 	// state values
-	const { name, description } = values;
+	const { name, description, users } = values;
 	// mutation
 	const [ createTeam ] = useMutation(CREATE_TEAM, {
 		// read query from cache / write query to cache
@@ -32,16 +36,33 @@ const Team = () => {
 				}
 			});
 		},
-		onError: (err) => console.log(err.graphqQLError[0].message)
+		onError: (err) => console.log(err.graphQLError[0].message)
 	});
 
 	// queries
 	const { data: teams } = useQuery(ALL_TEAMS);
+	const { data: usersFomDb } = useQuery(ALL_USERS);
+
+	/* useEffect(() => {
+		setValues({ users: usersFomDb && [ ...usersFomDb.allUsers ] });
+	}, []); */
+
+	/* 	useMemo(
+		() => {
+			if (users) {
+				setValues({
+					...values,
+					users: usersFomDb && usersFomDb.allUsers
+				});
+			}
+		},
+		[ users ]
+	); */
 
 	const [ deleteTeam ] = useMutation(DELETE_TEAM, {
 		update: ({ data }) => {
 			console.log('DELETE TEAM MUTATION', data);
-			toast.error(`L'équipe a été supprimé !`);
+			toast.info(`L'équipe a été supprimé !`);
 		},
 		onError: (err) => {
 			console.log(err);
@@ -50,7 +71,7 @@ const Team = () => {
 	});
 
 	const handleDelete = async (teamId) => {
-        // Ask user if he really want to delete
+		// Ask user if he really want to delete
 		let answer = window.confirm('Voulez-vous vraiment supprimé cette équipe ?');
 		if (answer) {
 			setLoading(true);
@@ -74,6 +95,17 @@ const Team = () => {
 	const onChangeHandler = (e) => {
 		e.preventDefault();
 		setValues({ ...values, [e.target.name]: e.target.value });
+	};
+
+	const onSelectChange = (e) => {
+		let options = e.target.options;
+		let users = [];
+		for (var i = 0, l = options.length; i < l; i++) {
+			if (options[i].selected) {
+				users.push(options[i].value);
+			}
+		}
+		setValues({ users: users, ...values });
 	};
 
 	const createTeamForm = () => {
@@ -103,6 +135,17 @@ const Team = () => {
 						disabled={loading}
 					/>
 				</div>
+				<div className="form-group mb-5 mt-3">
+					<label>Ajouter des personnes à votre équipe</label>
+					<select multiple={true} onChange={onSelectChange} name="users" className="custom-select" id="inputGroupSelect02">
+						{usersFomDb &&
+							usersFomDb.allUsers.map((user) => (
+								<option key={user._id} value={user}>
+									{user.name}
+								</option>
+							))}
+					</select>
+				</div>
 				<button className="btn btn-raised btn-primary" type="submit" disabled={loading || !name}>
 					Créer l'équipe
 				</button>
@@ -119,13 +162,27 @@ const Team = () => {
 				)}
 			</div>
 			{createTeamForm()}
+			{/* <TeamForm
+				onChangeHandler={onSubmitHandler}
+				onChangeHandler={onChangeHandler}
+				labelTitle="Nom de l'équipe"
+                name={name}
+                description={description}
+                loading={loading}
+                btnText="Créer l'équipe"
+			/> */}
 			<hr />
-			{/* 			{JSON.stringify(teams)} */}
+			{teams && JSON.stringify(teams)} {/* Need to make a check otherwise users.allUsers provoke an error */}
 			<div className="row p-5">
 				{teams &&
 					teams.teamsCreatedByAdmin.map((team) => (
 						<div className="col-md-6 pt-5" key={team._id}>
-							<TeamCard handleDelete={handleDelete} team={team} showDeleteButton={true} showUpdateButton={true} />
+							<TeamCard
+								handleDelete={handleDelete}
+								team={team}
+								showDeleteButton={true}
+								showUpdateButton={true}
+							/>
 						</div>
 					))}
 			</div>
