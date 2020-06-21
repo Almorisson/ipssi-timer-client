@@ -36,7 +36,7 @@ const Register = () => {
 				email={email}
 				setEmail={setEmail}
 				loading={loading}
-				showPassword={false}
+				showPasswordInput={false}
                 onSubmitHandler={onSubmitHandler}
                 btnText="Passer à la prochaine étape"
                 disabledBtn={!email || loading}
