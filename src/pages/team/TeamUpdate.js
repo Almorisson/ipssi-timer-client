@@ -129,7 +129,7 @@ const TeamUpdate = () => {
             <hr/>
             <TimerView />
 			<hr />
-			{singleTeam && JSON.stringify(singleTeam)}
+			{/* {singleTeam && JSON.stringify(singleTeam)} */}
 			{/* <TeamForm
 				onChangeHandler={onSubmitHandler}
 				onChangeHandler={onChangeHandler}
