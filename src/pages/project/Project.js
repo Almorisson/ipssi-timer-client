@@ -150,7 +150,7 @@ const Project = () => {
 			</div>
 			{createProjectForm()}
 			<hr />
-			{projects && JSON.stringify(projects)}{' '}
+			{projects && JSON.stringify(projects)}
 			{/* Need to make a check otherwise users.allUsers provoke an error */}
 			<div className="row p-5">
 				{projects &&

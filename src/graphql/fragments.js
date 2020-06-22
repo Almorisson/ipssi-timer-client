@@ -67,6 +67,7 @@ export const PROJECT_INFOS = gql`
 				username
 			}
 		}
+
 		createdAt
 		updatedAt
 	}
@@ -75,15 +76,15 @@ export const PROJECT_INFOS = gql`
 // team fragment
 export const TIMER_INFOS = gql`
 	fragment timerInfos on Timer {
-        _id
+		_id
 		title
 		description
-        project {
-            _id
-		    name
-		    description
-        }
-        createdAt
+		project {
+			_id
+			name
+			description
+		}
+		createdAt
 		updatedAt
-    }
+	}
 `;
