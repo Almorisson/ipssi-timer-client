@@ -10,8 +10,8 @@ import omitDeep from 'omit-deep';
 
 const initialState = {
 	name: '',
-	description: '',
-	users: []
+	description: ''
+	//users: []
 };
 const Team = () => {
 	const [ values, setValues ] = useState(initialState);
@@ -105,7 +105,7 @@ const Team = () => {
 				users.push(options[i].value);
 			}
 		}
-		setValues({ users: users, ...values });
+		//setValues({ users: users, ...values });
 	};
 
 	const createTeamForm = () => {
@@ -137,7 +137,13 @@ const Team = () => {
 				</div>
 				<div className="form-group mb-5 mt-3">
 					<label>Ajouter des personnes à votre équipe</label>
-					<select multiple={true} onChange={onSelectChange} name="users" className="custom-select" id="inputGroupSelect02">
+					<select
+						multiple={true}
+						onChange={onSelectChange}
+						name="users"
+						className="custom-select"
+						id="inputGroupSelect02"
+					>
 						{usersFomDb &&
 							usersFomDb.allUsers.map((user) => (
 								<option key={user._id} value={user}>
@@ -170,9 +176,9 @@ const Team = () => {
                 description={description}
                 loading={loading}
                 btnText="Créer l'équipe"
-			/> */}
+                /> */}
 			<hr />
-			{teams && JSON.stringify(teams)} {/* Need to make a check otherwise users.allUsers provoke an error */}
+			{/* Need to make a check otherwise users.allUsers provoke an error */}
 			<div className="row p-5">
 				{teams &&
 					teams.teamsCreatedByAdmin.map((team) => (
