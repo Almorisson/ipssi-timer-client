@@ -1,5 +1,5 @@
 import { gql } from 'apollo-boost';
-import { USER_INFOS, TEAM_INFOS } from './fragments';
+import { USER_INFOS, TEAM_INFOS, PROJECT_INFOS, TIMER_INFOS } from './fragments';
 
 // query user infos
 export const USER_PROFILE = gql`
@@ -39,4 +39,44 @@ export const SINGLE_TEAM = gql`
         }
     }
     ${TEAM_INFOS}
+`;
+
+// query all teams infos
+export const ALL_PROJECTS = gql`
+    query {
+		projectsCreatedByUser {
+			...projectsInfosForAUser
+		}
+	}
+    ${PROJECT_INFOS}
+`;
+
+// query a single team infos
+export const SINGLE_PROJECT = gql`
+    query singleProject($projectId: String!) {
+        singleProject(projectId: $projectId) {
+            ...projectsInfosForAUser
+        }
+    }
+    ${PROJECT_INFOS}
+`;
+
+// query a single timer infos
+export const SINGLE_Timer = gql`
+    query singleProject($timerId: String!) {
+        singleTimer(timerId: $timerId) {
+            ...timerInfos
+        }
+    }
+    ${TIMER_INFOS}
+`;
+
+// query all timers infos
+export const ALL_TIMERS = gql`
+    query {
+		allTimersPerProject {
+			...timerInfos
+		}
+	}
+    ${TIMER_INFOS}
 `;

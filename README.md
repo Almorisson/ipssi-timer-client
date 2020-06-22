@@ -1,68 +1,78 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center">
+	<img width="500" height="200" src="./src/assets/logo.svg" alt="Project Timer Manager logo">
+	<br>
+	<br>
+</div>
 
-## Available Scripts
+# Project Timer Manager - Client
 
-In the project directory, you can run:
+Project Timer Manager is a `` web application to log passed time by project`` that allow users `to manage its projects, teams and logged times`.
 
-### `yarn start`
+This part concerns the Frontend side of the web application. The application you are going to interact with.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Manage your projects easily with Project Timer Manager(PTM) by creating an account then teams and projects and logging all your tasks to top it all off.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Prerequisites
 
-### `yarn test`
+Before you begin, ensure you have met the following requirements:
+<!--- These are just example requirements. Add, duplicate or remove as required --->
+* If you have a `Windows`, `Linux` or a `Mac` machine, that's fine, you're good to go.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Installing Project Timer Manager - Client side
 
-### `yarn build`
+Rename the `.env.example` file in the root folder and put the correct values in the respective variables.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Here are values to put in `.env.example`
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+```sh
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+REACT_APP_GRAPHQL_ENDPOINT=http://localhost:8080/graphql # important to keep it like so 
+REACT_APP_REST_ENDPOINT=http://localhost:8080 # important to keep it like so 
+REACT_APP_COMPLETE_REGISTRATION_ENDPOINT=http://localhost:3001/complete-registration # important to keep it like so 
+REACT_APP_REDIRECT_LOGIN_ENDPOINT=http://localhost:3001/login # important to keep it like so 
 
-### `yarn eject`
+```
+## Using Project Timer Manager
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+To use **Project Timer Manager** , follow these steps:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```sh
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+docker-compose up --build
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+Now the client is ready to communicate with the backend and you begin using it by going on `` can.
 
-## Learn More
+You can play with the API without the front if you wish by going on: `http://localhost:8080/graphql`.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Note**: You must know how to make [GraphQL](https://graphql.org/) queries and mutations.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+## Contributing to Project Timer Manager
+<!--- If your README is long or you have some specific process or steps you want contributors to follow, consider creating a separate CONTRIBUTING.md file--->
+To contribute to Project Timer Manager, follow these steps:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+1. Fork this repository.
+2. Create a branch: `git checkout -b <branch_name>`.
+3. Make your changes and commit them: `git commit -m '<commit_message>'`
+4. Push to the original branch: `git push origin Project Timer Manager/<location>`
+5. Create the pull request.
 
-### Analyzing the Bundle Size
+Alternatively see the GitHub documentation on [creating a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+## Contributors
 
-### Making a Progressive Web App
+Here are the people who actively contributed to this project:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+* [@almorisson](https://github.com/almorisson) 📖
 
-### Advanced Configuration
+You might want to consider using something like the [All Contributors](https://github.com/all-contributors/all-contributors) specification and its [emoji key](https://allcontributors.org/docs/en/emoji-key) if you want to contribute to the project.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+## Contact
 
-### Deployment
+If you want to contact me you can reach me at <mo.ndiaye@ecole-ipssi.net>.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+## License
+<!--- If you're not sure which open license to use see https://choosealicense.com/--->
 
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+This project uses the following license: [The MIT License (MIT)](./LICENSE.md).

@@ -30,6 +30,8 @@ import './App.css';
 import CustomPublicRoute from './components/CustomPublicRoute';
 import Team from './pages/team/Team';
 import TeamUpdate from './pages/team/TeamUpdate';
+import Project from './pages/project/Project';
+import ProjectUpdate from './pages/project/ProjectUpdate';
 
 const App = () => {
 	const { state: { user } } = useContext(AuthContext);
@@ -70,6 +72,8 @@ const App = () => {
 				<CustomPrivateRoute path="/profile" component={Profile} />
 				<CustomPrivateRoute path="/teams" component={Team} />
 				<CustomPrivateRoute path="/team/update/:teamid" component={TeamUpdate} />
+				<CustomPrivateRoute path="/projects" component={Project} />
+				<CustomPrivateRoute path="/project/update/:projectid" component={ProjectUpdate} />
 			</Switch>
 		</ApolloProvider>
 	);
