@@ -71,3 +71,19 @@ export const PROJECT_INFOS = gql`
 		updatedAt
 	}
 `;
+
+// team fragment
+export const TIMER_INFOS = gql`
+	fragment timerInfos on Timer {
+        _id
+		title
+		description
+        project {
+            _id
+		    name
+		    description
+        }
+        createdAt
+		updatedAt
+    }
+`;

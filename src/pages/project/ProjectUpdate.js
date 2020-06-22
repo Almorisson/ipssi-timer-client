@@ -5,7 +5,7 @@ import { SINGLE_TEAM, ALL_USERS, SINGLE_PROJECT } from '../../graphql/queries';
 import { UPDATE_TEAM, UPDATE_PROJECT } from '../../graphql/mutations';
 import { useParams } from 'react-router-dom';
 import omitDeep from 'omit-deep';
-import TimerView from '../timer/Timer';
+import TimerView from '../timer/TimerView';
 
 const ProjectUpdate = () => {
 	const [ values, setValues ] = useState({
@@ -17,7 +17,7 @@ const ProjectUpdate = () => {
 
 	const [ loading, setLoading ] = useState(false);
 
-	// For routeing
+	// For routing
 	const { projectid } = useParams();
 
 	// Grab data inside state

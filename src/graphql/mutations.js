@@ -1,5 +1,5 @@
 import { gql } from 'apollo-boost';
-import { USER_INFOS, TEAM_INFOS, PROJECT_INFOS} from './fragments';
+import { USER_INFOS, TEAM_INFOS, PROJECT_INFOS, TIMER_INFOS} from './fragments';
 
 // Mutation(update user infos)
 export const UPDATE_USER_PROFILE = gql`
@@ -25,10 +25,20 @@ export const CREATE_TEAM = gql`
 export const CREATE_PROJECT = gql`
     mutation createProject($input: CreateProjectInput!) {
         createProject(input: $input) {
-            ...projectsInfosForAUser
+            ...timerInfos
         }
     }
-    ${PROJECT_INFOS}
+    ${TIMER_INFOS}
+`;
+
+// Mutation(create timer)
+export const CREATE_TIMER = gql`
+    mutation createProject($input: CreateTimerInput!, $projectId: String!) {
+        createTimer(input: $input, projectId: $projectId) {
+            ...timerInfos
+        }
+    }
+    ${TIMER_INFOS}
 `;
 
 // Mutation(update team infos)

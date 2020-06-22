@@ -6,7 +6,7 @@ import { UPDATE_TEAM } from '../../graphql/mutations';
 import { useParams } from 'react-router-dom';
 import TeamForm from '../../components/forms/TeamForm';
 import omitDeep from 'omit-deep';
-import TimerView from '../timer/Timer';
+import TimerView from '../timer/TimerView';
 
 const TeamUpdate = () => {
 	const [ values, setValues ] = useState({
