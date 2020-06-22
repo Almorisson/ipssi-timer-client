@@ -9,7 +9,7 @@ const Home = () => {
                 Welcome to IPSSI Timer Manager
            </div>
            <hr/>
-            {/* {JSON.stringify(state.user)} */}
+            {JSON.stringify(state.user)}
 		</div>
 	);
 };

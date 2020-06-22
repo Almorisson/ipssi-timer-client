@@ -6,6 +6,7 @@ import { UPDATE_TEAM } from '../../graphql/mutations';
 import { useParams } from 'react-router-dom';
 import TeamForm from '../../components/forms/TeamForm';
 import omitDeep from 'omit-deep';
+import TimerView from '../timer/TimerView';
 
 const TeamUpdate = () => {
 	const [ values, setValues ] = useState({
@@ -125,6 +126,8 @@ const TeamUpdate = () => {
 		<div className="container p-5">
 			{loading ? <h4 className="text-danger">Chargement en cours...</h4> : <h4>Mise à jour d'une équipe</h4>}
 			{updateForm()}
+            <hr/>
+            <TimerView />
 			<hr />
 			{singleTeam && JSON.stringify(singleTeam)}
 			{/* <TeamForm
