@@ -1,0 +1,4 @@
+node_modules
+build # if we are on production
+.dockerignore
+Dockerfile
